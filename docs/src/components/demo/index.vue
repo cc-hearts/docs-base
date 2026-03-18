@@ -13,6 +13,7 @@ defineOptions({
   name: "Demo",
 });
 
+
 const props = withDefaults(
   defineProps<{
     src: string;
@@ -27,15 +28,18 @@ const props = withDefaults(
   },
 );
 
+
 const route = useRoute();
 const router = useRouter();
 const showCode = shallowRef(false);
 const codeType = shallowRef<"ts" | "js">("ts");
 const demo = computed(() => demos[props.src]);
 
+
 const preferredLocale = computed(() => {
   return route.path.includes("/en") ? "en-US" : "zh-CN";
 });
+
 
 const description = computed(() => {
   const locales = demo.value?.locales ?? {};
@@ -48,6 +52,7 @@ const description = computed(() => {
   );
 });
 
+
 const component = computed<Component | undefined>(() => {
   if (typeof demo.value?.component === "function")
     return defineAsyncComponent(
@@ -55,6 +60,7 @@ const component = computed<Component | undefined>(() => {
     );
   return demo.value?.component as Component | undefined;
 });
+
 
 const id = computed(() =>
   props.src
@@ -83,10 +89,12 @@ const sourceHtml = computed(() => {
   return demo.value?.html || "";
 });
 
+
 const { copied, copy } = useClipboard({
   source: sourceCode,
   legacy: true,
 });
+
 
 const isActive = computed(() => route.hash === `#${id.value}`);
 const demoStyle = computed<CSSProperties>(() => {
@@ -104,9 +112,11 @@ const cls = computed(() => ({
   "ant-doc-demo-box-simplify": props.simplify,
 }));
 
+
 function toggleCode() {
   showCode.value = !showCode.value;
 }
+
 
 function navigateToAnchor(event: MouseEvent) {
   event.preventDefault();

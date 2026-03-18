@@ -8,6 +8,7 @@ defineOptions({
   name: "MyButton",
 });
 
+
 const props = defineProps<ButtonProps>();
 const emit = defineEmits<{
   click: [MouseEvent];

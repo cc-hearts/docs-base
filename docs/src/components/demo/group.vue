@@ -9,9 +9,11 @@ defineOptions({
   name: "DemoGroup",
 });
 
+
 const props = defineProps<{
   cols?: number;
 }>();
+
 
 const slots = useSlots();
 const pageInfo = usePageInfo();
@@ -20,6 +22,7 @@ const containerWidth = ref(0);
 const gap = 8;
 const minColumnWidth = 420;
 let resizeObserver: ResizeObserver | null = null;
+
 
 const configuredCols = computed(
   () => props.cols || pageInfo?.frontmatter?.demo?.cols || 1,
@@ -32,6 +35,7 @@ const actualCols = computed(() => {
   );
   return Math.max(1, Math.min(configuredCols.value, maxPossibleCols));
 });
+
 
 const columns = computed(() => {
   const children = (slots.default?.() || []).filter(node => {
@@ -49,9 +53,11 @@ const columns = computed(() => {
   return result;
 });
 
+
 function updateContainerWidth() {
   containerWidth.value = containerRef.value?.offsetWidth || 0;
 }
+
 
 onMounted(() => {
   updateContainerWidth();
@@ -62,6 +68,7 @@ onMounted(() => {
     resizeObserver.observe(containerRef.value);
   }
 });
+
 
 onUnmounted(() => {
   resizeObserver?.disconnect();

@@ -154,7 +154,7 @@ export function demoPlugin(md: MarkdownIt, config: { root?: string } = {}) {
         const headingSlug = getHeadingSlug(token);
 
         if (headingLevel && headingSlug) {
-          for (const level of [...activeHeaders.keys()]) {
+          for (const level of activeHeaders.keys()) {
             if (level >= headingLevel) activeHeaders.delete(level);
           }
 
